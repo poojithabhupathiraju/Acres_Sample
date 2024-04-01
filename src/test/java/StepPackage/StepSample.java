@@ -109,7 +109,11 @@ public class StepSample {
 		//rent.click();
 		//driver.findElement(By.xpath("//input[@label='Residential']/following-sibling::label[1]")).click();
 	   // driver.findElement(By.xpath("//span[text()='Flat/Apartment']")).click();
-	    
+	    String parenthandle = driver.getWindowHandle();
+	      Set<String> handle = driver.getWindowHandles();
+	      		for(String s:handle) {
+	      			driver.switchTo().window(s);
+	      		}
 	    Post_Property post = new Post_Property(driver);
 	    post.property_Enter1();
 	    post.property_Enter2();
@@ -134,7 +138,7 @@ public class StepSample {
 	@When("user clicks on start now option")
 	public void user_clicks_on_start_now_option() throws InterruptedException {
 	    // Write code here that turns the phrase above into concrete actions
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath("//button[contains(@class,'pageComponent ')]")).click();
 		
 
@@ -160,6 +164,12 @@ public class StepSample {
 		
 		Home_Page obj1 = new Home_Page(driver);
 		obj1.InsightsScroll();
+		
+		String parenthandle = driver.getWindowHandle();
+	      Set<String> handle = driver.getWindowHandles();
+	      		for(String s:handle) {
+	      			driver.switchTo().window(s);
+	      		}
 		obj1.Insights1();
 					
    }
@@ -206,17 +216,33 @@ public class StepSample {
 			
 	}
 
-	@When("user Enters the Invalid phone Number and it displays error message")
-	public void user_enters_the_invalid_phone_number_and_it_displays_error_message() {
+//	@When("user Enters the Invalid phone Number and it displays error message")
+//	public void user_enters_the_invalid_phone_number_and_it_displays_error_message() {
+//	    // Write code here that turns the phrase above into concrete actions
+//		//WebElement phoneNum = driver.findElement(By.name("phone"));
+//		//phoneNum.sendKeys("123456");
+//		Post_Property postInvalid = new Post_Property(driver);
+//		postInvalid.property_Mobile_Invalid();
+//		
+//		WebElement errorMsg = driver.findElement(By.xpath("//*[@class = 'eoiLyr_inpLabel caption_subdued_large']"));
+//		Assert.assertTrue(errorMsg.isDisplayed(),"That looks like an invalid number");
+//	}
+	
+	@When("user Enters the Invalid {string}")
+	public void user_enters_the_invalid(String phoneNumber) {
 	    // Write code here that turns the phrase above into concrete actions
-		//WebElement phoneNum = driver.findElement(By.name("phone"));
-		//phoneNum.sendKeys("123456");
 		Post_Property postInvalid = new Post_Property(driver);
-		postInvalid.property_Mobile_Invalid();
+		postInvalid.property_Mobile_Invalid(phoneNumber);
 		
-		WebElement errorMsg = driver.findElement(By.xpath("//*[@class = 'eoiLyr_inpLabel caption_subdued_large']"));
-		Assert.assertTrue(errorMsg.isDisplayed(),"That looks like an invalid number");
 	}
+
+	@When("it displays error message")
+	public void it_displays_error_message() {
+	    // Write code here that turns the phrase above into concrete actions
+	    WebElement errorMsg = driver.findElement(By.xpath("//*[@class = 'eoiLyr_inpLabel caption_subdued_large']"));
+    	Assert.assertTrue(errorMsg.isDisplayed(),"That looks like an invalid number");
+	}
+
 //
 	@Then("user clicks on the start Now option")
 	public void user_clicks_on_the_start_now_option() {
@@ -226,33 +252,36 @@ public class StepSample {
 	
 	//scenario 5
 	
-//	@When("user scroll to footer section")
-//	public void user_scroll_to_footer_section()  {
-//	    // Write code here that turns the phrase above into concrete actions
-//		JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
-//		javascriptExecutor.executeScript("window.scrollTo(0,document.body.scrollHeight)");
-//		//Thread.sleep(3000);
-//	}
-//	@When("user click on privacy policy link")
-//	public void user_click_on_privacy_policy_link() throws InterruptedException {
-//	    // Write code here that turns the phrase above into concrete actions
-//		WebDriverWait webDriverWait = new WebDriverWait(driver,Duration.ofSeconds(10));
-//
-//      WebElement privacybutton = webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@data-custominfo='{\"custom_object\":{\"url\":\"https://www.99acres.com/info/privacy\"}}']")));
-//      String parenthandle = driver.getWindowHandle();
-//      Set<String> handle = driver.getWindowHandles();
-//      		for(String s:handle) {
-//      			driver.switchTo().window(s);
-//      		}
-//      String actualUrl = driver.getCurrentUrl();
-//      String expectedUrl = "https://www.99acres.com/info/privacy";
-//      Assert.assertNotEquals(actualUrl,expectedUrl);
-//	}
-//
-//	@Then("user is redirected to privacy policy page")
-//	public void user_is_redirected_to_privacy_policy_page() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	}
+	@When("user scroll to footer section")
+	public void user_scroll_to_footer_section() throws InterruptedException  {
+	    // Write code here that turns the phrase above into concrete actions
+		JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
+		javascriptExecutor.executeScript("window.scrollTo(0,document.body.scrollHeight)");
+		
+	}
+	@When("user click on privacy policy link")
+	public void user_click_on_privacy_policy_link() throws InterruptedException {
+	    // Write code here that turns the phrase above into concrete actions
+	//	WebDriverWait webDriverWait = new WebDriverWait(driver,Duration.ofSeconds(10));
+
+    //  WebElement privacybutton = webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@data-custominfo='{\"custom_object\":{\"url\":\"https://www.99acres.com/info/privacy\"}}']")));
+			Home_Page obj1 = new Home_Page(driver);
+			obj1.PrivacyClick();
+			
+	}
+
+	@Then("user is redirected to privacy policy page")
+	public void user_is_redirected_to_privacy_policy_page() {
+	    // Write code here that turns the phrase above into concrete actions
+		  String parenthandle = driver.getWindowHandle();
+	      Set<String> handle = driver.getWindowHandles();
+	      		for(String s:handle) {
+	      			driver.switchTo().window(s);
+	      		}
+	      String actualUrl = driver.getCurrentUrl();
+	      String expectedUrl = "https://www.99acres.com/info/privacy";
+	      Assert.assertNotEquals(actualUrl,expectedUrl);
+	}
 //
 
 

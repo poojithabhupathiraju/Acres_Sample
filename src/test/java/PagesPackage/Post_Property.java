@@ -38,8 +38,8 @@ public class Post_Property {
 	public void property_Enter3_Invalid() {
 		property_Enter3_Invalid.click();
 	}
-	public void property_Mobile_Invalid() {
-		property_Mobile_Invalid.sendKeys("123456");
+	public void property_Mobile_Invalid(String phoneNumber) {
+		property_Mobile_Invalid.sendKeys(phoneNumber);
 	}
 	
 	//scenario 2

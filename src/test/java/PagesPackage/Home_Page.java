@@ -25,6 +25,7 @@ public class Home_Page {
 	@FindBy(xpath="//*[@class ='insightAndUtilities__insightsWrap']") WebElement InsightsScroll;
 	@FindBy(xpath="//div[@id  = 'MORE_INSIGHTS_AND_UTILITIES_VIEW_ALL']/button/span") WebElement Insights1;
 	@FindBy(xpath="//*[@class='pageComponent theader__op1 ']") WebElement PostPropertyOptNeg;
+	@FindBy(xpath="//a[@data-custominfo='{\\\"custom_object\\\":{\\\"url\\\":\\\"https://www.99acres.com/info/privacy\\\"}}']") WebElement PrivacyClick;
 	
 	public void HomeSearch1() {
 		HomeSearch1.click();
@@ -49,6 +50,13 @@ public class Home_Page {
 	}
 	public void PostPropertyOptNeg(){
 	   PostPropertyOptNeg.click();
+	}
+	
+	public void PrivacyClick() {
+		WebDriverWait webDriverWait = new WebDriverWait(driver,Duration.ofSeconds(10));
+	    webDriverWait.until(ExpectedConditions.elementToBeClickable(PrivacyClick));    
+
+
 	}
 	
 	
