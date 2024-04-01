@@ -82,7 +82,7 @@ public class StepSample {
 	    // Write code here that turns the phrase above into concrete actions
 	}
 //	
-	//Scenario 2
+	//Scenario 4
 
 	@When("user clicks on post your property option")
 	public void user_clicks_on_post_your_property_option() {
@@ -145,7 +145,7 @@ public class StepSample {
 	}
 
 //	
-	//Scenario 3
+	//Scenario 2
 
 	@When("user scrools down to the Insights and Tools Section")
 	public void user_scrools_down_to_the_insights_and_tools_section() {
@@ -161,16 +161,17 @@ public class StepSample {
    //  WebElement insightButton = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//div[@id  = 'MORE_INSIGHTS_AND_UTILITIES_VIEW_ALL']/button/span"))));
    //  insightButton.click();
 	// driver.findElement(By.xpath("(//span[text()='View all Insights']")).click();
-		
-		Home_Page obj1 = new Home_Page(driver);
-		obj1.InsightsScroll();
-		
 		String parenthandle = driver.getWindowHandle();
 	      Set<String> handle = driver.getWindowHandles();
 	      		for(String s:handle) {
 	      			driver.switchTo().window(s);
-	      		}
-		obj1.Insights1();
+	      }
+		Home_Page obj1 = new Home_Page(driver);
+		obj1.InsightsScroll();
+		
+		
+	      		
+	    obj1.Insights1();
 					
    }
 ////
@@ -183,7 +184,7 @@ public class StepSample {
 		System.out.println(checkTitle);
 	}
 //	
-	//Scenario 4
+	//Scenario 3
 	@When("user clicks on the post property option")
 	public void user_clicks_on_the_post_property_option() {
 	    // Write code here that turns the phrase above into concrete actions
@@ -280,7 +281,7 @@ public class StepSample {
 	      		}
 	      String actualUrl = driver.getCurrentUrl();
 	      String expectedUrl = "https://www.99acres.com/info/privacy";
-	      Assert.assertNotEquals(actualUrl,expectedUrl);
+	      Assert.assertEquals(actualUrl,expectedUrl);
 	}
 //
 

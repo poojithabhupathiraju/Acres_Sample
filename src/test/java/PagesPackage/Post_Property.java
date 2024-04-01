@@ -21,10 +21,17 @@ public class Post_Property {
 
 	
 	
-	@FindBy(xpath="//span[text()='Rent / Lease']") WebElement property_Enter1;
-	@FindBy(xpath="//input[@label='Residential']/following-sibling::label[1]") WebElement property_Enter2;
-	@FindBy(xpath="//span[text()='Flat/Apartment']") WebElement property_Enter3;
-	@FindBy(xpath="//input[@data-attr='inputText']") WebElement property_Mobile;
+	@FindBy(xpath="//span[text()='Rent / Lease']") 
+	WebElement property_Enter1;
+	
+	@FindBy(xpath="//input[@label='Residential']/following-sibling::label[1]")
+	WebElement property_Enter2;
+	
+	@FindBy(xpath="//span[text()='Flat/Apartment']") 
+	WebElement property_Enter3;
+	
+	@FindBy(xpath="//input[@data-attr='inputText']") 
+	WebElement property_Mobile;
 	
 	
 	//scenario 4

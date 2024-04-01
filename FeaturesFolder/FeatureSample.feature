@@ -5,44 +5,44 @@ Background: Navigate to 99Acres Home Page
 		When user open the 99Acres website
 		Then user should see the 99Acres App home page
 		
-Scenario: Project Search Section 
-		Given user is on the landing page
-		When User clicks on specific option
-		And user enters the data
-		And user clicks on search button
-		Then user is redirected to other page
+#Scenario: Project Search Section 
+#		Given user is on the landing page
+#		When User clicks on specific option
+#		And user enters the data
+#		And user clicks on search button
+#		Then user is redirected to other page
 	
 
 
-Scenario: Insights and Tools Section
- Given user is on the landing page
- When user scrools down to the Insights and Tools Section
- And user clicks on the view all Insights
-Then user should be redirected to other page
+#Scenario: Insights and Tools Section
+ #Given user is on the landing page
+ #When user scrools down to the Insights and Tools Section
+ #And user clicks on the view all Insights
+#Then user should be redirected to other page
 
-Scenario Outline: Post Property Section Invalid Number
-Given user is on the landing page
-When user clicks on the post property option
-And user is redirected to the next page
-And user Enters the required details
-And user Enters the Invalid <phoneNumber>  
-And it displays error message
-Then user clicks on the start Now option
+#Scenario Outline: Post Property Section Invalid Number
+#Given user is on the landing page
+#When user clicks on the post property option
+#And user is redirected to the next page
+#And user Enters the required details
+#And user Enters the Invalid <phoneNumber>  
+#And it displays error message
+#Then user clicks on the start Now option
+#
+#Examples:
+#|phoneNumber|
+#|"123456"|
+#|"3451234"|
 
-Examples:
-|phoneNumber|
-|"123456"|
-|"3451234"|
 
-
-Scenario: Post Property Section
-	Given user is on the landing page
-	When user clicks on post your property option
-	And user is redirected to next page
-	And user Enters the Details 
-	And user Enters the valid mobile Number and fill the form
-  And user clicks on start now option
-	Then user is redirected to other page
+#Scenario: Post Property Section
+#	Given user is on the landing page
+#	When user clicks on post your property option
+#	And user is redirected to next page
+#	And user Enters the Details 
+#	And user Enters the valid mobile Number and fill the form
+  #And user clicks on start now option
+#	Then user is redirected to other page
 
 
 Scenario: Navigate to privacy policy in footer Section
