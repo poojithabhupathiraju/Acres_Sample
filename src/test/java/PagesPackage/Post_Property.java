@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 public class Post_Property {
 	WebDriver driver;
@@ -33,6 +34,9 @@ public class Post_Property {
 	@FindBy(xpath="//input[@data-attr='inputText']") 
 	WebElement property_Mobile;
 	
+	@FindBy(xpath="//button[@as='a']")
+	WebElement property_start;
+	
 	
 	//scenario 4
 	public void property_Enter1_Invalid(){
@@ -45,8 +49,8 @@ public class Post_Property {
 	public void property_Enter3_Invalid() {
 		property_Enter3_Invalid.click();
 	}
-	public void property_Mobile_Invalid(String phoneNumber) {
-		property_Mobile_Invalid.sendKeys(phoneNumber);
+	public void property_Mobile_Invalid() {
+		property_Mobile_Invalid.sendKeys("123456");
 	}
 	
 	//scenario 2
@@ -60,6 +64,15 @@ public class Post_Property {
 		property_Enter3.click();
 	}
 	public void property_Mobile() {
-		property_Mobile.sendKeys("8328665677");
+		property_Mobile.sendKeys("8328665622");
+		
+	}
+	public void MobileDetails(String phoneNumber) {
+		property_Mobile.sendKeys(phoneNumber);
+	}
+	
+	public void property_start() {
+		property_start.click();
+
 	}
 }

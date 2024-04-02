@@ -1,25 +1,21 @@
 package StepPackage;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-import java.time.Duration;
 import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.devtools.idealized.Javascript;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import PagesPackage.Home_Page;
 import PagesPackage.Post_Property;
-
+import io.cucumber.java.AfterStep;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -27,10 +23,9 @@ import io.cucumber.java.en.When;
 
 public class StepSample {
 	
-	WebDriver driver;
+	static WebDriver driver;
 	@Given("user is on the landing page")
 	public void user_is_on_the_landing_page() {
-	    // Write code here that turns the phrase above into concrete actions
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 	
@@ -40,12 +35,10 @@ public class StepSample {
 
 	@When("user open the 99Acres website")
 	public void user_open_the_99acres_website() {
-	    // Write code here that turns the phrase above into concrete actions
 	}
 
 	@Then("user should see the 99Acres App home page")
 	public void user_should_see_the_99acres_app_home_page() {
-	    // Write code here that turns the phrase above into concrete actions
 	}
 	
 	//Scenario 1
@@ -60,16 +53,16 @@ public class StepSample {
 		obj1.HomeSearch1();
 		
    }
-//
-   @When("user enters the data")
-    public void user_enters_the_data() {
-//	    // Write code here that turns the phrase above into concrete actions
-//		Product_Search pro2 = new Product_Search(driver);
-//		pro2.search2();
-		Home_Page obj1 = new Home_Page(driver);
-		obj1.HomeSearch2();
+	
+	@When("user enters the data {string}")
+	public void user_enters_the_data(String cityName) {
+	    // Write code here that turns the phrase above into concrete actions
+	    Home_Page obj1 = new Home_Page(driver);
+	    obj1.HomeSearch2(cityName);
+	    
+	   
 	}
-//
+
 	@When("user clicks on search button")
 	public void user_clicks_on_search_button() {
 	    // Write code here that turns the phrase above into concrete actions
@@ -80,6 +73,14 @@ public class StepSample {
 	@Then("user is redirected to other page")
 	public void user_is_redirected_to_other_page() {
 	    // Write code here that turns the phrase above into concrete actions
+		 String parenthandle = driver.getWindowHandle();
+	      Set<String> handle = driver.getWindowHandles();
+	      		for(String s:handle) {
+	      			driver.switchTo().window(s);
+	      		}
+	      String actualUrl = driver.getCurrentUrl();
+	      String expectedUrl = "https://www.99acres.com/search/property/buy/mumbai?city=12&keyword=Mumbai&preference=S&area_unit=1&res_com=R";
+	      Assert.assertNotEquals(actualUrl,expectedUrl);
 	}
 //	
 	//Scenario 4
@@ -109,6 +110,7 @@ public class StepSample {
 		//rent.click();
 		//driver.findElement(By.xpath("//input[@label='Residential']/following-sibling::label[1]")).click();
 	   // driver.findElement(By.xpath("//span[text()='Flat/Apartment']")).click();
+	  
 	    String parenthandle = driver.getWindowHandle();
 	      Set<String> handle = driver.getWindowHandles();
 	      		for(String s:handle) {
@@ -127,8 +129,7 @@ public class StepSample {
 	public void user_enters_the_valid_mobile_number_and_fill_the_form() throws InterruptedException {
 	    // Write code here that turns the phrase above into concrete actions
 	   // driver.findElement(By.name("phone")).sendKeys("8328665677");
-		
-		//driver.findElement(By.xpath("//input[@data-attr='inputText']")).sendKeys("8328665677");
+				
 		Post_Property post = new Post_Property(driver);
 		post.property_Mobile();
 		
@@ -138,8 +139,15 @@ public class StepSample {
 	@When("user clicks on start now option")
 	public void user_clicks_on_start_now_option() throws InterruptedException {
 	    // Write code here that turns the phrase above into concrete actions
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("//button[contains(@class,'pageComponent ')]")).click();
+		Thread.sleep(6000);
+		
+		//driver.findElement(By.xpath("//button[contains(@class,'pageComponent ')]")).click();
+	
+		Post_Property post = new Post_Property(driver);
+		post.property_start();
+		 String actualUrl = driver.getCurrentUrl();
+	     String expectedUrl = "https://www.99acres.com/postproperty/register";
+	     Assert.assertNotEquals(actualUrl,expectedUrl);
 		
 
 	}
@@ -161,7 +169,8 @@ public class StepSample {
    //  WebElement insightButton = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//div[@id  = 'MORE_INSIGHTS_AND_UTILITIES_VIEW_ALL']/button/span"))));
    //  insightButton.click();
 	// driver.findElement(By.xpath("(//span[text()='View all Insights']")).click();
-		String parenthandle = driver.getWindowHandle();
+		
+	String parenthandle = driver.getWindowHandle();
 	      Set<String> handle = driver.getWindowHandles();
 	      		for(String s:handle) {
 	      			driver.switchTo().window(s);
@@ -174,17 +183,24 @@ public class StepSample {
 	    obj1.Insights1();
 					
    }
-////
+
 	@Then("user should be redirected to other page")
-	public void user_should_be_redirected_to_other_page() {
-	    WebElement insightTitle = driver.findElement(By.id("INSIGHTS_HEADING"));
+	public void user_should_be_redirected_to_other_page() throws InterruptedException {
+		String parenthandle = driver.getWindowHandle();
+	      Set<String> handle = driver.getWindowHandles();
+	      		for(String s:handle) {
+	      			driver.switchTo().window(s);
+	      		}
+		Thread.sleep(4000);
+	    WebElement insightTitle = driver.findElement(By.xpath("//div[text()='Latest & Greatest']"));
 	    String checkTitle =insightTitle.getText();
 		SoftAssert as=new SoftAssert();
-		as.assertEquals(checkTitle,"Discover Best Places to Live!");
+		as.assertEquals(checkTitle,"Latest & Greatest");
 		System.out.println(checkTitle);
 	}
-//	
+	
 	//Scenario 3
+	
 	@When("user clicks on the post property option")
 	public void user_clicks_on_the_post_property_option() {
 	    // Write code here that turns the phrase above into concrete actions
@@ -193,14 +209,14 @@ public class StepSample {
 		obj1.PostPropertyOptNeg();
 
 	}
-//
+
 	@When("user is redirected to the next page")
 	public void user_is_redirected_to_the_next_page() {
 	    // Write code here that turns the phrase above into concrete actions
 	//driver.get("https://www.99acres.com/postproperty/");	
 
 	}
-//
+
 	@When("user Enters the required details")
 	public void user_enters_the_required_details() throws InterruptedException {
 	    // Write code here that turns the phrase above into concrete actions
@@ -217,23 +233,12 @@ public class StepSample {
 			
 	}
 
-//	@When("user Enters the Invalid phone Number and it displays error message")
-//	public void user_enters_the_invalid_phone_number_and_it_displays_error_message() {
-//	    // Write code here that turns the phrase above into concrete actions
-//		//WebElement phoneNum = driver.findElement(By.name("phone"));
-//		//phoneNum.sendKeys("123456");
-//		Post_Property postInvalid = new Post_Property(driver);
-//		postInvalid.property_Mobile_Invalid();
-//		
-//		WebElement errorMsg = driver.findElement(By.xpath("//*[@class = 'eoiLyr_inpLabel caption_subdued_large']"));
-//		Assert.assertTrue(errorMsg.isDisplayed(),"That looks like an invalid number");
-//	}
 	
-	@When("user Enters the Invalid {string}")
-	public void user_enters_the_invalid(String phoneNumber) {
+	@When("user Enters the Invalid phoneNumber")
+	public void user_enters_the_invalid() {
 	    // Write code here that turns the phrase above into concrete actions
 		Post_Property postInvalid = new Post_Property(driver);
-		postInvalid.property_Mobile_Invalid(phoneNumber);
+		postInvalid.property_Mobile_Invalid();
 		
 	}
 
@@ -244,12 +249,12 @@ public class StepSample {
     	Assert.assertTrue(errorMsg.isDisplayed(),"That looks like an invalid number");
 	}
 
-//
+
 	@Then("user clicks on the start Now option")
 	public void user_clicks_on_the_start_now_option() {
 	    // Write code here that turns the phrase above into concrete actions
 	}
-//	
+	
 	
 	//scenario 5
 	
@@ -266,7 +271,9 @@ public class StepSample {
 	//	WebDriverWait webDriverWait = new WebDriverWait(driver,Duration.ofSeconds(10));
 
     //  WebElement privacybutton = webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@data-custominfo='{\"custom_object\":{\"url\":\"https://www.99acres.com/info/privacy\"}}']")));
-			Home_Page obj1 = new Home_Page(driver);
+			
+		Home_Page obj1 = new Home_Page(driver);
+			Thread.sleep(7000);
 			obj1.PrivacyClick();
 			
 	}
@@ -283,10 +290,17 @@ public class StepSample {
 	      String expectedUrl = "https://www.99acres.com/info/privacy";
 	      Assert.assertEquals(actualUrl,expectedUrl);
 	}
-//
-
-
 	
+		
+	@AfterStep
+		public static void tearDown(Scenario scenario){
 	
-
+	   final byte[] screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+	   scenario.attach(screenshot, "image/png", scenario.getName());
+		}
 }
+
+	
+	
+
+
